@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ВГУ | ИМО — Foreign Student Guide</title>
+<style>
+:root {
+  --primary: #003366; --primary-light: #004080; --accent: #FFD700; --accent-dark: #E6C200;
+  --bg: #F5F7FA; --surface: #FFFFFF; --success: #28A745; --danger: #DC3545; --warning: #FFC107;
+  --warning-bg: #FFF3CD; --text: #212529; --text-secondary: #6C757D; --border: #DEE2E6;
+  --shadow: 0 4px 12px rgba(0,51,102,0.08); --shadow-lg: 0 8px 24px rgba(0,51,102,0.12);
+  --radius: 12px; --radius-sm: 8px; --transition: all 0.3s ease;
+  --font: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #0F172A; --surface: #1E293B; --text: #F1F5F9; --text-secondary: #94A3B8;
+  --border: #334155; --shadow: 0 4px 12px rgba(0,0,0,0.3); --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+  --warning-bg: #3D3A1A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; font-size: 16px; overflow-x: hidden; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.header { position: fixed; top: 0; left: 0; right: 0; background: var(--primary); color: white; z-index: 1000; box-shadow: var(--shadow-lg); transition: var(--transition); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: white; text-decoration: none; }
+.logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 900; font-size: 16px; }
+.nav-desktop { display: flex; gap: 4px; list-style: none; }
+.nav-desktop a { color: rgba(255,255,255,0.85); padding: 8px 14px; border-radius: 6px; font-size: 14px; font-weight: 500; transition: var(--transition); text-decoration: none; white-space: nowrap; }
+.nav-desktop a:hover, .nav-desktop a.active { background: rgba(255,255,255,0.15); color: white; }
+.nav-desktop a.active { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3); }
+.header-actions { display: flex; align-items: center; gap: 12px; }
+.btn-icon { width: 40px; height: 40px; border-radius: 8px; border: none; background: rgba(255,255,255,0.1); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+.btn-icon:hover { background: rgba(255,255,255,0.2); }
+.burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.burger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; transition: var(--transition); }
+
+/* Mobile menu */
+.mobile-menu { position: fixed; top: 0; left: -280px; width: 280px; height: 100vh; background: var(--primary); z-index: 1001; padding: 80px 24px 24px; transition: left 0.3s ease; overflow-y: auto; }
+.mobile-menu.open { left: 0; }
+.mobile-menu-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.mobile-menu-overlay.open { opacity: 1; pointer-events: all; }
+.mobile-menu a { display: block; color: rgba(255,255,255,0.9); padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 16px; text-decoration: none; }
+.mobile-menu a.active { color: var(--accent); font-weight: 600; }
+
+/* Main */
+main { padding-top: 64px; min-height: 100vh; }
+.section { display: none; animation: fadeIn 0.3s ease; padding: 32px 0 48px; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Hero */
+.hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 60px 0 48px; margin-bottom: 32px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px; background: rgba(255,215,0,0.08); border-radius: 50%; }
+.hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 12px; line-height: 1.2; }
+.hero p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; max-width: 600px; }
+.hero-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 24px; }
+.hero-card { background: rgba(255,255,255,0.12); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius); padding: 24px; cursor: pointer; transition: var(--transition); }
+.hero-card:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+.hero-card-icon { font-size: 32px; margin-bottom: 12px; }
+.hero-card h3 { font-size: 18px; margin-bottom: 6px; }
+.hero-card p { font-size: 14px; opacity: 0.8; margin: 0; }
+.deadline-counter { background: var(--danger); color: white; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; display: inline-block; margin-top: 8px; }
+
+/* Typography */
+h1 { font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+h2 { font-size: 24px; font-weight: 700; margin: 32px 0 16px; }
+h3 { font-size: 20px; font-weight: 600; margin: 24px 0 12px; }
+h4 { font-size: 18px; font-weight: 600; margin: 20px 0 10px; }
+p { margin-bottom: 12px; }
+.text-secondary { color: var(--text-secondary); font-size: 14px; }
+
+/* Cards */
+.card { background: var(--surface); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow); transition: var(--transition); }
+.card:hover { box-shadow: var(--shadow-lg); }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+/* Tabs */
+.tabs-nav { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+.tab-btn { padding: 10px 20px; border-radius: 20px; border: none; background: var(--bg); color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: var(--transition); white-space: nowrap; }
+.tab-btn:hover { background: var(--border); color: var(--text); }
+.tab-btn.active { background: var(--accent); color: var(--primary); font-weight: 600; }
+.tab-content { display: none; animation: fadeIn 0.3s ease; }
+.tab-content.active { display: block; }
+
+/* Accordion */
+.accordion { border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 12px; overflow: hidden; background: var(--surface); }
+.accordion-header { width: 100%; padding: 16px 20px; background: var(--surface); border: none; text-align: left; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--text); transition: var(--transition); }
+.accordion-header:hover { background: var(--bg); }
+.accordion-icon { font-size: 20px; font-weight: 300; transition: transform 0.3s; color: var(--primary); }
+.accordion.open .accordion-icon { transform: rotate(45deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.accordion.open .accordion-body { max-height: 2000px; }
+.accordion-inner { padding: 0 20px 20px; }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 10px; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, var(--primary), var(--accent)); border-radius: 3px; }
+.timeline-item { position: relative; margin-bottom: 24px; cursor: pointer; }
+.timeline-dot { position: absolute; left: -28px; top: 4px; width: 20px; height: 20px; background: var(--surface); border: 3px solid var(--primary); border-radius: 50%; transition: var(--transition); }
+.timeline-item:hover .timeline-dot { background: var(--accent); border-color: var(--accent); transform: scale(1.2); }
+.timeline-time { font-weight: 700; color: var(--primary); font-size: 14px; margin-bottom: 4px; }
+.timeline-title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+.timeline-card { background: var(--surface); border-radius: var(--radius-sm); padding: 16px; margin-top: 8px; box-shadow: var(--shadow); display: none; border-left: 4px solid var(--accent); }
+.timeline-item.open .timeline-card { display: block; animation: fadeIn 0.3s; }
+
+/* Alerts */
+.alert { border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 20px; display: flex; gap: 12px; align-items: flex-start; }
+.alert-warning { background: var(--warning-bg); border-left: 4px solid var(--warning); }
+.alert-danger { background: #F8D7DA; border-left: 4px solid var(--danger); }
+[data-theme="dark"] .alert-danger { background: #3A1A1E; }
+.alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.alert-content h4 { margin: 0 0 6px; font-size: 16px; }
+.alert-content p { margin: 0; font-size: 14px; }
+
+/* Calculator */
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.calc-options { display: flex; flex-direction: column; gap: 12px; }
+.calc-option { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--surface); border-radius: var(--radius-sm); border: 2px solid var(--border); cursor: pointer; transition: var(--transition); }
+.calc-option:hover { border-color: var(--primary); }
+.calc-option input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
+.calc-option.disabled { opacity: 0.5; cursor: not-allowed; }
+.calc-option label { flex: 1; cursor: pointer; font-size: 15px; }
+.calc-price { font-weight: 700; color: var(--primary); font-size: 15px; }
+.calc-result { background: var(--surface); border-radius: var(--radius); padding: 32px; text-align: center; box-shadow: var(--shadow); position: sticky; top: 80px; height: fit-content; }
+.calc-result h3 { font-size: 18px; color: var(--text-secondary); margin-bottom: 16px; }
+.calc-total { font-size: 48px; font-weight: 700; margin-bottom: 8px; transition: color 0.3s; }
+.calc-total.green { color: var(--success); }
+.calc-total.yellow { color: var(--warning); }
+.calc-total.blue { color: var(--primary); }
+.calc-note { font-size: 14px; color: var(--text-secondary); margin-top: 16px; }
+
+/* Checklists */
+.checklist-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.checklist-tab { padding: 10px 20px; border-radius: 20px; border: 2px solid var(--border); background: var(--surface); color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: var(--transition); }
+.checklist-tab:hover { border-color: var(--primary); color: var(--primary); }
+.checklist-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+.checklist-content { display: none; }
+.checklist-content.active { display: block; animation: fadeIn 0.3s; }
+.checklist-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--surface); border-radius: var(--radius-sm); margin-bottom: 8px; border: 1px solid var(--border); transition: var(--transition); }
+.checklist-item:hover { border-color: var(--primary); }
+.checklist-item input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--primary); margin-top: 2px; cursor: pointer; }
+.checklist-item.checked { opacity: 0.7; background: var(--bg); }
+.checklist-item.checked span { text-decoration: line-through; color: var(--text-secondary); }
+.progress-bar { width: 100%; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin: 16px 0 8px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 4px; transition: width 0.5s ease; }
+.progress-text { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
+
+/* Address cards */
+.address-card { background: var(--surface); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); transition: var(--transition); }
+.address-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.address-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; margin-bottom: 12px; }
+.address-card h4 { font-size: 16px; margin-bottom: 8px; color: var(--primary); }
+.address-card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; }
+.address-card .btn-copy { margin-top: 12px; padding: 8px 16px; font-size: 13px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text); transition: var(--transition); }
+.address-card .btn-copy:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-sm); border: none; font-size: 15px; font-weight: 600; cursor: pointer; transition: var(--transition); text-decoration: none; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: var(--shadow); }
+.btn-accent { background: var(--accent); color: var(--primary); }
+.btn-accent:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--surface); border-radius: var(--radius); max-width: 560px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 32px; box-shadow: var(--shadow-lg); transform: scale(0.95); transition: transform 0.3s; }
+.modal-overlay.open .modal { transform: scale(1); }
+.modal h2 { margin-top: 0; font-size: 24px; color: var(--primary); }
+.modal-step { margin-bottom: 24px; }
+.modal-step h3 { font-size: 16px; margin-bottom: 12px; color: var(--text); }
+.modal-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.modal-option { padding: 12px 20px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer; transition: var(--transition); font-size: 14px; }
+.modal-option:hover { border-color: var(--primary); }
+.modal-option.selected { border-color: var(--primary); background: var(--primary); color: white; }
+
+/* Search */
+.search-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 2000; display: flex; flex-direction: column; align-items: center; padding-top: 120px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.search-overlay.open { opacity: 1; pointer-events: all; }
+.search-box { width: 100%; max-width: 600px; padding: 0 20px; }
+.search-input { width: 100%; padding: 16px 24px; font-size: 18px; border: none; border-radius: var(--radius); background: var(--surface); color: var(--text); box-shadow: var(--shadow-lg); outline: none; }
+.search-input::placeholder { color: var(--text-secondary); }
+.search-results { margin-top: 16px; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-lg); max-height: 400px; overflow-y: auto; }
+.search-result-item { padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: var(--transition); }
+.search-result-item:hover { background: var(--bg); }
+.search-result-item h4 { font-size: 15px; margin: 0 0 4px; color: var(--primary); }
+.search-result-item p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+
+/* Floating panel */
+.floating-panel { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border-radius: var(--radius); padding: 16px 20px; box-shadow: var(--shadow-lg); border-left: 4px solid var(--danger); z-index: 500; max-width: 320px; cursor: pointer; transition: var(--transition); display: none; }
+.floating-panel:hover { transform: translateY(-2px); }
+.floating-panel h4 { font-size: 14px; margin: 0 0 4px; color: var(--danger); }
+.floating-panel p { font-size: 13px; margin: 0; color: var(--text-secondary); }
+
+/* Back to top */
+.btn-top { position: fixed; bottom: 24px; left: 24px; width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: var(--shadow-lg); z-index: 500; opacity: 0; pointer-events: none; transition: var(--transition); }
+.btn-top.visible { opacity: 1; pointer-events: all; }
+.btn-top:hover { background: var(--primary-light); transform: translateY(-2px); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; margin-bottom: 20px; }
+table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow); }
+th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+th { background: var(--primary); color: white; font-weight: 600; }
+tr:hover { background: var(--bg); }
+
+/* Footer */
+.footer { background: var(--primary); color: rgba(255,255,255,0.8); padding: 40px 0 24px; margin-top: 48px; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-bottom: 24px; }
+.footer h4 { color: white; font-size: 16px; margin-bottom: 12px; }
+.footer a { color: rgba(255,255,255,0.7); display: block; padding: 4px 0; font-size: 14px; }
+.footer a:hover { color: var(--accent); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 13px; color: rgba(255,255,255,0.5); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-desktop { display: none; }
+  .burger { display: flex; }
+  .hero h1 { font-size: 24px; }
+  .hero p { font-size: 16px; }
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+  .tabs-nav { overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+  .card-grid { grid-template-columns: 1fr; }
+  .calc-grid { grid-template-columns: 1fr; }
+  .timeline { padding-left: 24px; }
+  .header-inner { padding: 0 16px; }
+}
+
+@media print {
+  .header, .btn-top, .floating-panel, .hero-cards, .tabs-nav, .accordion-header .accordion-icon { display: none !important; }
+  .section { display: block !important; }
+  .accordion-body { max-height: none !important; display: block !important; }
+  .tab-content { display: block !important; }
+  body { background: white; color: black; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 8px; }
+.mb-2 { margin-bottom: 16px; }
+.mb-3 { margin-bottom: 24px; }
+.mt-2 { margin-top: 16px; }
+.text-center { text-align: center; }
+.flex { display: flex; }
+.gap-2 { gap: 16px; }
+.items-center { align-items: center; }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#start" class="logo" onclick="navigateTo('start')">
+      <div class="logo-icon">ВГУ</div>
+      <span>ВГУ | ИМО — Foreign Student Guide</span>
+    </a>
+    <nav>
+      <ul class="nav-desktop" id="navDesktop">
+        <li><a href="#start" data-section="start" class="active">Старт</a></li>
+        <li><a href="#before" data-section="before">До отъезда</a></li>
+        <li><a href="#first-day" data-section="first-day">Первый день</a></li>
+        <li><a href="#first-week" data-section="first-week">Первая неделя</a></li>
+        <li><a href="#procedures" data-section="procedures">Процедуры</a></li>
+        <li><a href="#study" data-section="study">Учёба</a></li>
+        <li><a href="#budget" data-section="budget">Бюджет</a></li>
+        <li><a href="#contacts" data-section="contacts">Контакты</a></li>
+        <li><a href="#checklists" data-section="checklists">Мои чек-листы</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-icon" onclick="toggleSearch()" aria-label="Поиск" title="Поиск">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </button>
+      <button class="btn-icon" onclick="toggleTheme()" aria-label="Тема" title="Переключить тему">
+        <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+      <div class="burger" onclick="toggleMobileMenu()" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<nav class="mobile-menu" id="mobileMenu">
+  <a href="#start" onclick="navigateTo('start'); toggleMobileMenu()">Старт</a>
+  <a href="#before" onclick="navigateTo('before'); toggleMobileMenu()">До отъезда</a>
+  <a href="#first-day" onclick="navigateTo('first-day'); toggleMobileMenu()">Первый день</a>
+  <a href="#first-week" onclick="navigateTo('first-week'); toggleMobileMenu()">Первая неделя</a>
+  <a href="#procedures" onclick="navigateTo('procedures'); toggleMobileMenu()">Процедуры</a>
+  <a href="#study" onclick="navigateTo('study'); toggleMobileMenu()">Учёба</a>
+  <a href="#budget" onclick="navigateTo('budget'); toggleMobileMenu()">Бюджет</a>
+  <a href="#contacts" onclick="navigateTo('contacts'); toggleMobileMenu()">Контакты</a>
+  <a href="#checklists" onclick="navigateTo('checklists'); toggleMobileMenu()">Мои чек-листы</a>
+</nav>
+
+<!-- Search -->
+<div class="search-overlay" id="searchOverlay" onclick="if(event.target===this)toggleSearch()">
+  <div class="search-box">
+    <input type="text" class="search-input" id="searchInput" placeholder="Поиск по сайту..." oninput="performSearch(this.value)">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- Survey Modal -->
+<div class="modal-overlay" id="surveyModal">
+  <div class="modal">
+    <h2>Добро пожаловать в ВГУ!</h2>
+    <p class="text-secondary mb-2">Чтобы показать только нужную информацию, ответьте на несколько вопросов.</p>
+    <div class="modal-step">
+      <h3>1. Вы из визовой или безвизовой страны?</h3>
+      <div class="modal-options">
+        <button class="modal-option" data-q="visa" data-val="visa" onclick="selectSurvey(this)">Визовая страна</button>
+        <button class="modal-option" data-q="visa" data-val="visa-free" onclick="selectSurvey(this)">Безвизовая страна</button>
+      </div>
+    </div>
+    <div class="modal-step">
+      <h3>2. Вам исполнилось 18 лет?</h3>
+      <div class="modal-options">
+        <button class="modal-option" data-q="age" data-val="adult" onclick="selectSurvey(this)">Да, 18+</button>
+        <button class="modal-option" data-q="age" data-val="minor" onclick="selectSurvey(this)">Нет, мне нет 18</button>
+      </div>
+    </div>
+    <div class="modal-step">
+      <h3>3. На каком уровне будете учиться?</h3>
+      <div class="modal-options">
+        <button class="modal-option" data-q="level" data-val="prep" onclick="selectSurvey(this)">Подготовительный факультет</button>
+        <button class="modal-option" data-q="level" data-val="bachelor" onclick="selectSurvey(this)">Бакалавриат / Специалитет</button>
+        <button class="modal-option" data-q="level" data-val="master" onclick="selectSurvey(this)">Магистратура</button>
+        <button class="modal-option" data-q="level" data-val="phd" onclick="selectSurvey(this)">Аспирантура</button>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="saveSurvey()" style="width:100%;justify-content:center;margin-top:8px;">Сохранить и продолжить</button>
+  </div>
+</div>
+
+<main>
+
+<!-- ====== START ====== -->
+<section class="section active" id="start" data-section="start">
+  <div class="hero">
+    <div class="container">
+      <h1>Ваши первые 90 дней в Воронеже</h1>
+      <p>Пошаговый цифровой гид для иностранных студентов ИМО ВГУ. Вся информация из официальных инструкций — в удобном интерактивном формате.</p>
+      <div class="hero-cards">
+        <div class="hero-card" onclick="navigateTo('before')">
+          <div class="hero-card-icon">🛫</div>
+          <h3>Я получил визу</h3>
+          <p>Что взять с собой, какие документы подготовить и куда отправить сканы</p>
+        </div>
+        <div class="hero-card" onclick="navigateTo('first-day')">
+          <div class="hero-card-icon">🏠</div>
+          <h3>Я в пути / Прилетаю сегодня</h3>
+          <p>Пошаговый план первого дня: от страховки до заселения в общежитие</p>
+        </div>
+        <div class="hero-card" onclick="navigateTo('procedures')">
+          <div class="hero-card-icon">⚠️</div>
+          <h3 id="deadlineText">До дедлайна осталось — дней</h3>
+          <p id="deadlineSub">Проверьте критические сроки миграционного учёта и продления визы</p>
+          <span class="deadline-counter" id="deadlineCounter" style="display:none;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <h2>Критические даты</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h4>📅 Начало занятий</h4>
+        <p><strong>1 сентября 2026</strong></p>
+        <p class="text-secondary">Рекомендуемый въезд: с 25 августа</p>
+      </div>
+      <div class="card">
+        <h4>🏥 Медосвидетельствование</h4>
+        <p><strong>30 календарных дней</strong> с 01.09.2026</p>
+        <p class="text-secondary">Штраф 25 000–50 000 ₽ при просрочке</p>
+      </div>
+      <div class="card">
+        <h4>🛂 Продление визы</h4>
+        <p><strong>За 30–45 дней</strong> до окончания визы</p>
+        <p class="text-secondary">Несоблюдение = депортация</p>
+      </div>
+      <div class="card">
+        <h4>📋 Миграционный учёт</h4>
+        <p><strong>7 рабочих дней</strong> с момента въезда</p>
+        <p class="text-secondary">Штраф 2 000–7 000 ₽ и депортация</p>
+      </div>
+    </div>
+    <h2>Быстрые контакты ИМО ВГУ</h2>
+    <div class="card">
+      <p><strong>📍 Адрес:</strong> ул. Хользунова, 40А, корпус №6 ВГУ</p>
+      <p><strong>🕐 Режим работы:</strong> Пн–Чт 9:00–17:00, Пт 9:00–16:00</p>
+      <div class="mt-2">
+        <p><strong>📧 Email:</strong></p>
+        <p><a href="mailto:imo@interedu.vsu.ru">imo@interedu.vsu.ru</a> (основной)</p>
+        <p><a href="mailto:Plutakhinasv@mail.ru">Plutakhinasv@mail.ru</a></p>
+        <p><a href="mailto:smorodinova@interedu.vsu.ru">smorodinova@interedu.vsu.ru</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== BEFORE DEPARTURE ====== -->
+<section class="section" id="before" data-section="before">
+  <div class="container">
+    <h1>До отъезда</h1>
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(this,'before-visa')" role="tab" aria-selected="true">Виза и приглашение</button>
+      <button class="tab-btn" onclick="switchTab(this,'before-docs')" role="tab" aria-selected="false">Документы</button>
+      <button class="tab-btn" onclick="switchTab(this,'before-tickets')" role="tab" aria-selected="false">Билеты и маршрут</button>
+    </div>
+
+    <div class="tab-content active" id="before-visa" role="tabpanel">
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-content">
+          <h4>Важно!</h4>
+          <p>Въезд в Россию должен быть осуществлён <strong>не позднее чем за 30 дней</strong> до окончания срока действия визы. Желательно — раньше.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Получение приглашения</h3>
+        <p>Приглашение на обучение появится в вашем личном кабинете на портале <a href="https://russia-edu.minobrnauki.gov.ru/" target="_blank">russia-edu.minobrnauki.gov.ru</a> в разделе <strong>«Визовая информация» → «Визовые инструкции»</strong>.</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Регулярно проверяйте свой аккаунт до получения визы</li>
+          <li>После появления визового указания распечатайте его</li>
+          <li>Обратитесь в Посольство РФ для подачи документов на учебную визу</li>
+          <li>Проверьте правильность данных (ФИО, даты, цель въезда: «Учеба»)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Уведомление об прибытии</h3>
+        <p>Не позднее чем за <strong>7 дней</strong> до вылета (минимум — за 3 дня) направьте в ИМО ВГУ:</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Копию билета или заказа на билет</li>
+          <li>Скан российской визы</li>
+          <li>Скан главной страницы паспорта (все страницы должны быть читаемы)</li>
+        </ul>
+        <p><strong>Email:</strong> <a href="mailto:imo@interedu.vsu.ru">imo@interedu.vsu.ru</a>, <a href="mailto:Plutakhinasv@mail.ru">Plutakhinasv@mail.ru</a>, <a href="mailto:smorodinova@interedu.vsu.ru">smorodinova@interedu.vsu.ru</a></p>
+      </div>
+      <div class="card">
+        <h3>Проверка паспорта</h3>
+        <p>Срок действия загранпаспорта должен составлять <strong>не менее 1,5 года</strong> (18 месяцев) на момент оформления визы.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="before-docs" role="tabpanel">
+      <div class="card">
+        <h3>Документы, которые нужно взять с собой (оригиналы + нотариальные переводы)</h3>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false"><span>📘 Загранпаспорт</span><span class="accordion-icon">+</span></button>
+          <div class="accordion-body"><div class="accordion-inner"><p>Срок действия не менее 1,5 года. Проверьте дату окончания до покупки билетов.</p></div></div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false"><span>🎓 Документ об образовании</span><span class="accordion-icon">+</span></button>
+          <div class="accordion-body"><div class="accordion-inner"><p>Аттестат или диплом с <strong>апостилем/легализацией</strong> + нотариальный перевод на русский язык. Для подготовительного факультета — легализованный документ об образовании.</p></div></div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false"><span>📄 Приложение с оценками</span><span class="accordion-icon">+</span></button>
+          <div class="accordion-body"><div class="accordion-inner"><p>Приложение к диплому/аттестату с оценками + нотариальный перевод.</p></div></div>
+        </div>
+        <div class="accordion" id="doc-birth">
+          <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false"><span>👶 Свидетельство о рождении + перевод</span><span class="accordion-icon">+</span></button>
+          <div class="accordion-body"><div class="accordion-inner"><p>Требуется, если вам <strong>нет 18 лет</strong>. Также понадобится доверенность от родителей + перевод.</p></div></div>
+        </div>
+        <div class="accordion" id="doc-proxy">
+          <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false"><span>✍️ Доверенность от родителей + перевод</span><span class="accordion-icon">+</span></button>
+          <div class="accordion-body"><div class="accordion-inner"><p>Обязательна для несовершеннолетних. Понадобится при посещении Единого миграционного центра (сопровождение представителем ВГУ ИМО + доверенное лицо).</p></div></div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false"><span>📷 Фотографии 3×4 см</span><span class="accordion-icon">+</span></button>
+          <div class="accordion-body"><div class="accordion-inner"><p><strong>6–8 штук</strong>. Лучше с запасом. Если не хватит — салон полиграфии рядом с ИМО (ул. Хользунова, 50).</p></div></div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)" aria-expanded="false"><span>🛂 Виза (оригинал)</span><span class="accordion-icon">+</span></button>
+          <div class="accordion-body"><div class="accordion-inner"><p>Полученная по приглашению ВГУ. Проверьте цель въезда: «Учеба».</p></div></div>
+        </div>
+      </div>
+      <div class="alert alert-warning" id="minor-alert" style="display:none;">
+        <span class="alert-icon">👶</span>
+        <div class="alert-content">
+          <h4>Вы несовершеннолетний</h4>
+          <p>Обязательно возьмите свидетельство о рождении и доверенность от родителей с нотариальным переводом. Посещение Единого миграционного центра должно сопровождаться представителем ВГУ ИМО и доверенным лицом.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="before-tickets" role="tabpanel">
+      <div class="card">
+        <h3>Как добраться до Воронежа</h3>
+        <p>Из Москвы в Воронеж можно добраться <strong>только на поезде</strong> (авиасообщение отсутствует).</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Время в пути: <strong>7–12 часов</strong></li>
+          <li>Билеты: <a href="https://rzd.ru" target="_blank">rzd.ru</a> или приложение РЖД</li>
+          <li>Планируйте прибытие строго в <strong>будние дни</strong> в рабочие часы</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Рекомендуемые приложения (установите заранее)</h3>
+        <div class="card-grid">
+          <div class="address-card"><div class="address-icon">🏛️</div><h4>Госуслуги</h4><p>Государственные сервисы, активация SIM-карты</p></div>
+          <div class="address-card"><div class="address-icon">🔐</div><h4>MAX</h4><p>Для входа в Госуслуги, подтверждение личности</p></div>
+          <div class="address-card"><div class="address-icon">💬</div><h4>ВКонтакте</h4><p>Основная социальная сеть и коммуникация в РФ</p></div>
+          <div class="address-card"><div class="address-icon">🚕</div><h4>Яндекс Go</h4><p>Такси и доставка (альтернатива Uber)</p></div>
+          <div class="address-card"><div class="address-icon">🏦</div><h4>Сбербанк Онлайн</h4><p>Банковские операции, отключение подписок</p></div>
+          <div class="address-card"><div class="address-icon">🌐</div><h4>Google Переводчик</h4><p>Загрузите русский язык для офлайн-перевода</p></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Наличные деньги</h3>
+        <p>Рекомендуется взять с собой <strong>25 000–30 000 ₽</strong> наличными для первых расходов (страховка, регистрация, мелкие покупки).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FIRST DAY ====== -->
+<section class="section" id="first-day" data-section="first-day">
+  <div class="container">
+    <h1>Первый день</h1>
+    <div class="alert alert-danger">
+      <span class="alert-icon">⚠️</span>
+      <div class="alert-content">
+        <h4>Критически важно!</h4>
+        <p>Прибытие в администрацию ИМО — <strong>строго до 10:00</strong> в будние дни. Прибытие после 10:00 или в выходной = заселение переносится на следующий день, проживание в отеле за ваш счёт.</p>
+      </div>
+    </div>
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(this,'fd-timeline')" role="tab" aria-selected="true">Пошаговый таймлайн</button>
+      <button class="tab-btn" onclick="switchTab(this,'fd-checklist')" role="tab" aria-selected="false">Чек-лист для заселения</button>
+    </div>
+
+    <div class="tab-content active" id="fd-timeline" role="tabpanel">
+      <div class="card">
+        <p><strong>📍 Адрес ИМО ВГУ:</strong> ул. Хользунова, 40А, корпус №6</p>
+        <p><strong>🕐 Часы работы:</strong> Пн–Чт 9:00–17:00, Пт 9:00–16:00</p>
+        <p class="text-secondary">Идеальное время прибытия — к 9:00. Если позже 10:00 — заселение на следующий день.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" onclick="toggleTimeline(this)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">09:00 – 10:00</div>
+          <div class="timeline-title">Каб. 238 — Медицинская страховка</div>
+          <p class="text-secondary">Консультация и оформление страховки на 1 год</p>
+          <div class="timeline-card">
+            <p><strong>💰 Стоимость:</strong> ~5 000 ₽/год</p>
+            <p><strong>📄 Документы:</strong> паспорт, миграционная карта, виза</p>
+            <p><strong>✅ Покрывает:</strong> амбулаторное лечение, госпитализацию, экстренную помощь, транспортировку, репатриацию</p>
+            <p class="text-secondary">Без страховки невозможно получить мед. справку для общежития</p>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleTimeline(this)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">10:00 – 10:30</div>
+          <div class="timeline-title">Каб. 242 — Регистрация и перевод паспорта</div>
+          <p class="text-secondary">Регистрация контактов, проверка документов</p>
+          <div class="timeline-card">
+            <p><strong>📝 Действия:</strong> проверка документов, регистрация контактных данных</p>
+            <p><strong>📄 Перевод паспорта:</strong> ~2 000 ₽, 1–3 рабочих дня (бюро «Языкон» или другое аккредитованное)</p>
+            <p><strong>⚠️ Важно:</strong> перевод паспорта нужен для миграционного учёта, SIM-карты, банка, Госуслуг, СНИЛС</p>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleTimeline(this)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">10:30 – 11:00</div>
+          <div class="timeline-title">МЦ «Пересвет» — Анализы (натощак!)</div>
+          <p class="text-secondary">Анализ крови + флюорография. До 10:50!</p>
+          <div class="timeline-card">
+            <p><strong>📍 Адрес:</strong> ул. Шишкова, 107Б (~10–15 мин пешком)</p>
+            <p><strong>⏰ Условия:</strong> строго натощак и до 10:50</p>
+            <p><strong>💰 Стоимость:</strong> бесплатно при наличии страховки</p>
+            <p><strong>⚠️ ВНИМАНИЕ:</strong> Опоздание = заселение переносится на следующий день!</p>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleTimeline(this)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">11:00 – 12:00</div>
+          <div class="timeline-title">Каб. 239а/238 — Справка о зачислении и заявление на заселение</div>
+          <p class="text-secondary">Получение документов для общежития</p>
+          <div class="timeline-card">
+            <p><strong>📄 Документы:</strong> паспорт, виза</p>
+            <p><strong>📋 Выдаётся:</strong> справка о зачислении + заявление на заселение</p>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleTimeline(this)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">14:00 – 15:00</div>
+          <div class="timeline-title">«Пересвет» — Результаты анализов и мед. справка</div>
+          <p class="text-secondary">Выдача после 14:00</p>
+          <div class="timeline-card">
+            <p><strong>📄 Получается:</strong> результаты анализа крови, флюорография, медицинская справка для общежития</p>
+            <p><strong>💰 Стоимость:</strong> бесплатно со страховкой</p>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleTimeline(this)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">15:00 – 15:30</div>
+          <div class="timeline-title">Каб. 236 — Передача результатов</div>
+          <p class="text-secondary">Передача результатов анализов в ИМО + фото</p>
+          <div class="timeline-card">
+            <p><strong>📄 Документы:</strong> результаты анализов, 4 фото 3×4</p>
+            <p><strong>⚠️ Важно:</strong> без этих документов заселение невозможно</p>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleTimeline(this)">
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">15:30 – 16:30</div>
+          <div class="timeline-title">Ул. Ф. Энгельса, 8 — Заселение в общежитие</div>
+          <p class="text-secondary">Получение ключа и временного пропуска</p>
+          <div class="timeline-card">
+            <p><strong>📍 Адрес:</strong> ул. Ф. Энгельса, 8, общежитие №1</p>
+            <p><strong>👤 Начальник УСЖК:</strong> Власов А.В.</p>
+            <p><strong>📋 Действия:</strong> предъявить полный пакет документов, получить подпись на заявлении, номер общежития и комнаты</p>
+            <p><strong>💰 Оплата:</strong> 1 200–1 500 ₽/мес (по реквизитам на стенде)</p>
+            <p><strong>🔑 Получается:</strong> ключ от комнаты и временный пропуск</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="fd-checklist" role="tabpanel">
+      <div class="card">
+        <h3>Документы для заселения в общежитие</h3>
+        <p>Полный пакет, который нужно иметь при себе:</p>
+        <div style="margin-top:16px;">
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Результаты анализа крови и флюорографии (из «Пересвета» после 14:00)</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Копия паспорта</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Копия визы</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Копия миграционной карты</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>2 фотографии 3×4 см</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Анкета для вселения (из каб. 238 ИМО)</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Справка об обучении (из каб. 239а ИМО)</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Медицинская справка для вселения (из «Пересвета»)</span></div>
+          <div class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Чек об оплате общежития</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Миграционная карта</h3>
+        <p>Выдаётся при пересечении границы РФ. Проверьте:</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Цель въезда: «Учеба / Education»</li>
+          <li>ФИО — строго как в паспорте</li>
+        </ul>
+        <p><strong>Сфотографируйте бланк</strong> и сохраните в телефоне. Храните в паспорте, сдайте при отъезде. Утрата карты = серьёзные проблемы с миграционной службой.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FIRST WEEK ====== -->
+<section class="section" id="first-week" data-section="first-week">
+  <div class="container">
+    <h1>Первая неделя</h1>
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(this,'fw-migration')" role="tab" aria-selected="true">Миграционный учёт</button>
+      <button class="tab-btn" onclick="switchTab(this,'fw-medical')" role="tab" aria-selected="false">Медицина (Пересвет)</button>
+      <button class="tab-btn" onclick="switchTab(this,'fw-social')" role="tab" aria-selected="false">Социалка</button>
+    </div>
+
+    <div class="tab-content active" id="fw-migration" role="tabpanel">
+      <div class="alert alert-danger">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-content">
+          <h4>Миграционный учёт — 7 рабочих дней!</h4>
+          <p>Согласно ФЗ № 109-ФЗ, иностранный гражданин обязан встать на миграционный учёт в течение <strong>7 рабочих дней</strong> с момента въезда. Нарушение: штраф 2 000–7 000 ₽ и депортация.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Постановка на учёт в общежитии ВГУ</h3>
+        <p><strong>📍 Место:</strong> каб. 240–241, ул. Хользунова, 40А</p>
+        <p><strong>⏳ Срок оформления:</strong> до 10 рабочих дней (готовую регистрацию забирают в каб. 240)</p>
+        <p><strong>💰 Стоимость:</strong> 500 ₽ (госпошлина)</p>
+        <h4>Документы для первичной постановки на учёт:</h4>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Оригинал паспорта с отметкой пограничного контроля</li>
+          <li>Оригинал миграционной карты</li>
+          <li>Временный пропуск (из общежития)</li>
+          <li>2 фотографии 3×4 см</li>
+          <li>Полис медицинского страхования</li>
+          <li>Квитанция об оплате госпошлины (500 ₽)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Правила сохранения регистрации</h3>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Регистрация аннулируется при выезде из РФ, внутреннем перелёте, заселении в гостиницу/хостел, стационарном лечении</li>
+          <li>При возвращении в общежитие — необходимо заново оформить регистрацию</li>
+          <li>При смене адреса проживания — уведомить ИМО ВГУ в течение 2 рабочих дней</li>
+          <li>При проживании вне общежития — постановка на учёт самостоятельно с собственником жилья в ОВМ УМВД или через МФЦ</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Продление регистрации</h3>
+        <p>Необходимо подать документы на продление регистрации в кабинет 240 в случае:</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>получения новой визы</li>
+          <li>изменения места жительства</li>
+          <li>выезда из РФ</li>
+          <li>изменения паспорта</li>
+          <li>пребывания в больнице</li>
+          <li>выезда из Воронежской области более чем на 7 календарных дней</li>
+        </ul>
+        <p><strong>Стоимость:</strong> 500 ₽ (визовые страны) / 1 500 ₽ (безвизовые страны)</p>
+        <p><strong>Документы:</strong> паспорт, регистрация, миграционная карта, зелёная карта, справки медицинского освидетельствования (3 шт.)</p>
+      </div>
+      <div class="card">
+        <h3>Электронный пропуск</h3>
+        <p>Оформляется после получения студенческого билета.</p>
+        <p><strong>📍 Отдел безопасности ВГУ:</strong> ул. Хользунова, 42В (экономический факультет, 1 этаж)</p>
+        <p><strong>🕐 Время:</strong> Пн–Пт, 13:00–16:00</p>
+        <p><strong>📄 Документы:</strong> студенческий билет (через 6–7 раб. дней после начала занятий), справка о зачислении, временный пропуск, паспорт</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="fw-medical" role="tabpanel">
+      <div class="card">
+        <h3>Медицинский центр «Пересвет»</h3>
+        <p><strong>📍 Адрес:</strong> ул. Шишкова, 107Б</p>
+        <p><strong>🚶 Расстояние от ИМО:</strong> ~10–15 минут пешком или на такси</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Процедура</th><th>Время</th><th>Условия</th><th>Стоимость</th></tr></thead>
+            <tbody>
+              <tr><td>Анализ крови</td><td>До 10:50, натощак</td><td>Обязателен для общежития</td><td>Бесплатно со страховкой</td></tr>
+              <tr><td>Флюорография</td><td>До 10:50</td><td>Обязательна для общежития</td><td>Бесплатно со страховкой</td></tr>
+              <tr><td>Мед. справка для общежития</td><td>После 14:00</td><td>Выдаётся после результатов</td><td>Бесплатно со страховкой</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠️</span>
+          <div class="alert-content">
+            <h4>Важно!</h4>
+            <p>Анализы сдаются строго натощак и до 10:50. Опоздание = невозможность заселения в день прибытия.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Медицинская страховка</h3>
+        <p>Обязательна для всех иностранных обучающихся.</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li><strong>Стоимость:</strong> ~5 000 ₽/год</li>
+          <li><strong>Покрывает:</strong> амбулаторное лечение, госпитализацию, экстренную помощь, транспортировку, репатриацию</li>
+          <li><strong>Документы:</strong> паспорт, миграционная карта, виза</li>
+        </ul>
+        <p class="text-secondary">Без страховки невозможно получить медицинскую справку для общежития.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="fw-social" role="tabpanel">
+      <div class="card">
+        <h3>СНИЛС (Страховой номер индивидуального лицевого счёта)</h3>
+        <p><strong>📍 Адрес:</strong> ул. Дружинников, 5Б — Клиентская служба СФР (Социальный фонд России)</p>
+        <p><strong>⏳ Готовность:</strong> в день обращения</p>
+        <p><strong>💰 Стоимость:</strong> бесплатно</p>
+        <p><strong>📄 Документы:</strong> загранпаспорт, перевод паспорта, миграционная карта, российский номер телефона</p>
+        <p class="text-secondary">СНИЛС выдаётся в виде распечатки — сохраните номер. Необходим для активации SIM-карты и доступа к социальным услугам.</p>
+      </div>
+      <div class="card">
+        <h3>SIM-карта</h3>
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠️</span>
+          <div class="alert-content">
+            <h4>Важно!</h4>
+            <p>С 1 января 2025 года покупка SIM-карты возможна только после регистрации в Единой биометрической системе. «Серые» SIM-карты отключаются.</p>
+          </div>
+        </div>
+        <p><strong>📍 Рекомендуемый оператор — Билайн:</strong> Московский проспект, 82А</p>
+        <p><strong>📄 Документы:</strong> загранпаспорт, перевод паспорта, миграционная карта</p>
+        <p><strong>Активация:</strong> через приложение Госуслуги после прохождения биометрии в банке. Сохраните упаковку с номером.</p>
+      </div>
+      <div class="card">
+        <h3>Банковская карта и биометрия</h3>
+        <p><strong>📍 Сбербанк:</strong> ул. Шишкова, 65</p>
+        <p>Биометрия + карта оформляются одновременно.</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li><strong>Процедура:</strong> фотография на камеру + произнесение цифр 1–9 (~5 минут)</li>
+          <li><strong>Документы:</strong> паспорт (для карты достаточно паспорта)</li>
+          <li><strong>Срок:</strong> карта оформляется за 15 минут</li>
+          <li><strong>⚠️ Важно:</strong> автоматически подключается СберПрайм — отключите через 1–2 недели в приложении</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Регистрация на Госуслугах</h3>
+        <p><strong>📍 МФЦ «Мои документы»:</strong> ул. Дружинников, 3Б</p>
+        <p>Регистрация осуществляется с помощью сотрудника МФЦ.</p>
+        <p><strong>📄 Документы:</strong> паспорт, перевод, миграционная карта, СНИЛС, российский телефон, email</p>
+        <p class="text-secondary">Для полноценного использования необходимы приложения MAX и ВКонтакте.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROCEDURES ====== -->
+<section class="section" id="procedures" data-section="procedures">
+  <div class="container">
+    <h1>Процедуры</h1>
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(this,'proc-dactyl')" role="tab" aria-selected="true">Дактилоскопия (30 дней)</button>
+      <button class="tab-btn" onclick="switchTab(this,'proc-visa')" role="tab" aria-selected="false">Продление визы</button>
+      <button class="tab-btn" onclick="switchTab(this,'proc-exit')" role="tab" aria-selected="false">Правила выезда</button>
+    </div>
+
+    <div class="tab-content active" id="proc-dactyl" role="tabpanel">
+      <div class="alert alert-danger">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-content">
+          <h4>Обязательно с 01.09.2026!</h4>
+          <p>С 1 сентября 2026 г. иностранные граждане подлежат обязательной дактилоскопической регистрации, фотографированию и медицинскому освидетельствованию в течение <strong>30 календарных дней</strong> со дня въезда (№ 162-ФЗ). Нарушение: штраф 25 000–50 000 ₽ с возможным административным выдворением.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Кто освобождается</h3>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Граждане Республики Беларусь</li>
+          <li>Лица с РВП или ВНЖ</li>
+          <li>Лица с двойным гражданством, одно из которых — российское</li>
+        </ul>
+      </div>
+      <div class="card" id="minor-dactyl">
+        <h3>Для несовершеннолетних (&lt;18)</h3>
+        <p>Посещение Единого миграционного центра должно сопровождаться <strong>представителем ВГУ ИМО</strong> и <strong>доверенным лицом от родителей</strong>.</p>
+      </div>
+      <div class="card">
+        <h3>Шаг 1: Медицинское освидетельствование</h3>
+        <p><strong>📍 Единый миграционный центр:</strong> ул. 9 Января, 68-з (3-й подъезд, 3-й этаж)</p>
+        <p><strong>🕐 Часы работы:</strong> Пн–Пт, 9:00–17:00</p>
+        <p><strong>💰 Стоимость:</strong> от 7 500 ₽</p>
+        <p><strong>⏳ Результат:</strong> через 1–2 дня</p>
+        <p><strong>📄 Документы:</strong> загранпаспорт, перевод паспорта, миграционная карта, регистрация</p>
+        <p><strong>Что получить:</strong> квитанцию о прохождении медосвидетельствования (действительна для дактилоскопии)</p>
+      </div>
+      <div class="card">
+        <h3>Шаг 2: Дактилоскопическая регистрация</h3>
+        <p><strong>📍 Миграционный центр:</strong> ул. 9 Января, 68-з (3-й подъезд, 3-й этаж)</p>
+        <p><strong>⏳ Срок:</strong> в день получения результатов медосвидетельствования или на следующий день</p>
+        <p><strong>💰 Стоимость:</strong> 2 500–4 500 ₽</p>
+        <p><strong>📄 Документы:</strong> загранпаспорт, перевод, миграционная карта, квитанция из п. 1, регистрация</p>
+        <p><strong>Процедура:</strong> снятие отпечатков пальцев + фотографирование</p>
+        <p><strong>Что получить:</strong> 3 медицинских сертификата, заключение о дактилоскопии</p>
+      </div>
+      <div class="card">
+        <h3>Шаг 3: Зелёная карта мигранта</h3>
+        <p>Документ, подтверждающий прохождение медкомиссии и дактилоскопии. Необходима для продления визы.</p>
+        <p><strong>📍 Получение:</strong> по месту регистрации в Отделах Миграции по Воронежской области:</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Ул. Урицкого, 58 (среда, 9:00–11:00)</li>
+          <li>Ул. Войкова, 8</li>
+          <li>Ул. 9 Января, 68-и</li>
+        </ul>
+        <p><strong>📄 Документы:</strong> паспорт, чек о дактилоскопии, миграционная карта, регистрация, сертификат о медосвидетельствовании, справка о дактилоскопии, личный код</p>
+        <div class="alert alert-warning">
+          <span class="alert-icon">⚠️</span>
+          <div class="alert-content">
+            <h4>Обязательно!</h4>
+            <p>После получения зелёной карты предъявьте её в ИМО ВГУ (каб. 240/241, ул. Хользунова, 40А).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="proc-visa" role="tabpanel">
+      <div class="alert alert-danger">
+        <span class="alert-icon">⚠️</span>
+        <div class="alert-content">
+          <h4>Критический срок!</h4>
+          <p>Документы на продление визы необходимо подать <strong>не позднее чем за 30–45 календарных дней</strong> до окончания срока действия визы. Несоблюдение срока = основание для депортации.</p>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Документы для продления визы</h3>
+        <p><strong>📍 Миграционно-визовый отдел ИМО ВГУ:</strong> ул. Хользунова, 40А, каб. 240</p>
+        <p>Документы принимаются в оригиналах:</p>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Чек об оплате госпошлины (6 000 ₽) — реквизиты в каб. 240</li>
+          <li>Загранпаспорт (оригинал)</li>
+          <li>Регистрация (отрывная часть уведомления)</li>
+          <li>Миграционная карта</li>
+          <li>Медицинская страховка</li>
+          <li>2 фотографии 3×4 см</li>
+          <li>Чек о прохождении дактилоскопии</li>
+          <li>3 медицинских сертификата (из п. 7.2)</li>
+          <li>Зелёная карта мигранта</li>
+          <li>Договор на обучение (для основных программ)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Порядок продления</h3>
+        <ol style="margin:12px 0 12px 20px;">
+          <li>Получите реквизиты для оплаты госпошлины в каб. 240 ИМО</li>
+          <li>Оплатите госпошлину (6 000 ₽)</li>
+          <li>Соберите полный пакет документов</li>
+          <li>Подайте документы в каб. 240 ИМО ВГУ</li>
+          <li>Получите справку о приёме документов</li>
+          <li>Паспорт остаётся в ПВС на время оформления</li>
+          <li>Заберите паспорт с продлённой визой в указанный срок</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="tab-content" id="proc-exit" role="tabpanel">
+      <div class="card">
+        <h3>Правила выезда из РФ</h3>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Регистрация аннулируется при выезде из РФ</li>
+          <li>При досрочном прекращении обучения — <strong>обязательный выезд</strong> из РФ</li>
+          <li>При несвоевременном продлении регистрации — выезд из РФ</li>
+          <li>Для визовых стран, досрочно прекративших обучение: оформить транзитную визу в течение <strong>7 дней</strong> с даты отчисления</li>
+          <li>Штраф и запрет на въезд — последствия нарушения сроков</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Отказ от обучения</h3>
+        <p>Если вы решили отказаться от обучения, обязательно сообщите об этом в ИМО ВГУ, чтобы избежать проблем со стипендией и миграционным учётом. По запросу будет выслана форма заявления об отказе от обучения в университете.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== STUDY ====== -->
+<section class="section" id="study" data-section="study">
+  <div class="container">
+    <h1>Учёба</h1>
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(this,'study-nostr')" role="tab" aria-selected="true">Нострификация</button>
+      <button class="tab-btn" onclick="switchTab(this,'study-levels')" role="tab" aria-selected="false">По уровням обучения</button>
+      <button class="tab-btn" onclick="switchTab(this,'study-quota')" role="tab" aria-selected="false">Квотники РС</button>
+    </div>
+
+    <div class="tab-content active" id="study-nostr" role="tabpanel">
+      <div class="card">
+        <h3>Что такое нострификация</h3>
+        <p>Нострификация — подтверждение документов об образовании для признания их действительными в РФ.</p>
+        <p class="text-secondary"><strong>Не требуется</strong> для поступающих на подготовительный факультет!</p>
+      </div>
+      <div class="card">
+        <h3>Необходимые документы</h3>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Паспорт + нотариальный перевод</li>
+          <li>Диплом/аттестат + нотариальный перевод</li>
+          <li>Приложение с оценками + нотариальный перевод</li>
+          <li>Свидетельство о рождении + перевод (если нет 18 лет)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Порядок нострификации</h3>
+        <ol style="margin:12px 0 12px 20px;">
+          <li>Регистрация пакета в <strong>каб. 242 ИМО</strong> (специалист: Карпухина Н.А.)</li>
+          <li>Нотариальный перевод всех документов (бюро «Языкон» или другое аккредитованное, от 1 500 ₽/стр.)</li>
+          <li>Подача на нострификацию (через ИМО или самостоятельно)</li>
+          <li>Подтверждение получения (регистрация в каб. 242)</li>
+        </ol>
+        <p><strong>💰 Госпошлина:</strong> ~6 500 ₽</p>
+        <p><strong>💰 Услуги оформления (через бюро):</strong> от 12 000 ₽</p>
+        <p><strong>⏳ Срок подготовки:</strong> 45 дней</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="study-levels" role="tabpanel">
+      <div class="card">
+        <h3>Сравнение уровней обучения</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Уровень</th><th>Срок</th><th>Нострификация</th><th>Особенности</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Подготовительный факультет</strong></td><td>1 год</td><td>Не требуется</td><td>Бесплатно по квоте. Свидетельство о завершении.</td></tr>
+              <tr><td><strong>Бакалавриат / Специалитет</strong></td><td>4–6 лет</td><td>Обязательна</td><td>Договор на обучение для продления визы</td></tr>
+              <tr><td><strong>Магистратура</strong></td><td>2 года</td><td>Обязательна</td><td>Требуется диплом бакалавра/специалиста с нострификацией</td></tr>
+              <tr><td><strong>Аспирантура</strong></td><td>3–4 года</td><td>Обязательна</td><td>При наличии квоты или контракта</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Подготовительный факультет</h3>
+        <p><strong>Профили подготовки:</strong> медико-биологический, естественнонаучный, инженерно-технический, экономический, гуманитарный.</p>
+        <p><strong>Стоимость:</strong> бесплатно (в рамках квоты) / по контракту.</p>
+        <p><strong>Обязательность:</strong> обязателен для поступления на основные программы без владения русским языком.</p>
+        <p><strong>Выдаваемый документ:</strong> свидетельство о завершении подготовительного факультета.</p>
+      </div>
+    </div>
+
+    <div class="tab-content" id="study-quota" role="tabpanel">
+      <div class="card">
+        <h3>Квотники Россотрудничества</h3>
+        <ul style="margin:12px 0 12px 20px;">
+          <li>Приглашение появляется в личном кабинете на <a href="https://russia-edu.minobrnauki.gov.ru/" target="_blank">russia-edu.minobrnauki.gov.ru</a></li>
+          <li>Обучение на подготовительном факультете и основных программах — <strong>бесплатно</strong></li>
+          <li>Стипендия выплачивается в соответствии с внутренними правилами ВГУ</li>
+          <li>При отказе от обучения необходимо написать заявление об отказе в ИМО ВГУ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== BUDGET ====== -->
+<section class="section" id="budget" data-section="budget">
+  <div class="container">
+    <h1>Бюджет</h1>
+    <div class="tabs-nav" role="tablist">
+      <button class="tab-btn active" onclick="switchTab(this,'budget-calc')" role="tab" aria-selected="true">Калькулятор</button>
+      <button class="tab-btn" onclick="switchTab(this,'budget-table')" role="tab" aria-selected="false">Таблицы расходов</button>
+    </div>
+
+    <div class="tab-content active" id="budget-calc" role="tabpanel">
+      <div class="calc-grid">
+        <div class="calc-options">
+          <div class="calc-option" id="opt-prep" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-prep"><label for="calc-prep">Подготовительный факультет</label>
+          </div>
+          <div class="calc-option" id="opt-main" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-main"><label for="calc-main">Основная программа</label>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-insurance" data-price="5000"><label for="calc-insurance">Мед. страховка</label><span class="calc-price">+5 000 ₽</span>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-medexam" data-price="7500"><label for="calc-medexam">Медосвидетельствование</label><span class="calc-price">+7 500 ₽</span>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-dactyl" data-price="3500"><label for="calc-dactyl">Дактилоскопия</label><span class="calc-price">+3 500 ₽</span>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-translate" data-price="2000"><label for="calc-translate">Перевод паспорта</label><span class="calc-price">+2 000 ₽</span>
+          </div>
+          <div class="calc-option" id="opt-nostr" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-nostr" data-price="18500"><label for="calc-nostr">Нострификация</label><span class="calc-price">+18 500 ₽</span>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-reg" data-price="500"><label for="calc-reg">Первичная регистрация</label><span class="calc-price">+500 ₽</span>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-visaext" data-price="6000"><label for="calc-visaext">Продление визы</label><span class="calc-price">+6 000 ₽</span>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-dorm" data-price="15000"><label for="calc-dorm">Общежитие на год</label><span class="calc-price">+15 000 ₽</span>
+          </div>
+          <div class="calc-option" onclick="toggleCalcOption(this)">
+            <input type="checkbox" id="calc-misc" data-price="1500"><label for="calc-misc">Мелкие расходы</label><span class="calc-price">+1 500 ₽</span>
+          </div>
+        </div>
+        <div class="calc-result">
+          <h3>Ваш итог</h3>
+          <div class="calc-total green" id="calcTotal">0 ₽</div>
+          <p class="calc-note">Выберите нужные пункты слева для расчёта</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="budget-table" role="tabpanel">
+      <div class="card">
+        <h3>Обязательные первоначальные расходы</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>№</th><th>Статья расходов</th><th>Сумма (₽)</th><th>Примечание</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Проживание в общежитии (год)</td><td>14 000–18 000</td><td>~1 200–1 500 ₽/мес.</td></tr>
+              <tr><td>2</td><td>Медицинская страховка (1 год)</td><td>5 000</td><td>Оформляется в каб. 238</td></tr>
+              <tr><td>3</td><td>Медицинское освидетельствование</td><td>7 500</td><td>В течение 30 дней</td></tr>
+              <tr><td>4</td><td>Дактилоскопия</td><td>2 500–4 500</td><td>После медосвидетельствования</td></tr>
+              <tr><td>5</td><td>Продление визы (госпошлина)</td><td>6 000</td><td>За 30–45 дней до окончания визы</td></tr>
+              <tr><td>6</td><td>Постановка на миграционный учёт</td><td>500</td><td>С 1 сентября 2025 г.</td></tr>
+              <tr><td>7</td><td>Продление регистрации</td><td>500 / 1 500</td><td>Визовые / безвизовые страны</td></tr>
+              <tr><td>8</td><td>Нотариальный перевод паспорта</td><td>2 000</td><td>При необходимости</td></tr>
+              <tr><td>9</td><td>Нострификация (не для подгот. фак.)</td><td>18 500+</td><td>Госпошлина + услуги бюро</td></tr>
+              <tr><td>10</td><td>Мелкие расходы</td><td>1 000–2 000</td><td>Фото, ксерокопии, транспорт</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>ИТОГО (подготовительный факультет):</strong> ~31 000–34 000 ₽</p>
+        <p><strong>ИТОГО (основные программы):</strong> ~50 000+ ₽ (с нострификацией)</p>
+        <p class="text-secondary">Курсы валют приблизительны. Данные актуальны на август 2026 г.</p>
+      </div>
+      <div class="card">
+        <h3>Ежемесячные расходы (ориентировочно)</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Статья</th><th>Сумма (₽/мес)</th></tr></thead>
+            <tbody>
+              <tr><td>Проживание</td><td>1 200–1 500</td></tr>
+              <tr><td>Питание</td><td>8 000–12 000</td></tr>
+              <tr><td>Транспорт</td><td>1 500–2 000</td></tr>
+              <tr><td>Связь</td><td>300–500</td></tr>
+              <tr><td>Прочее</td><td>2 000–3 000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACTS ====== -->
+<section class="section" id="contacts" data-section="contacts">
+  <div class="container">
+    <h1>Контакты</h1>
+    <div class="card-grid">
+      <div class="address-card">
+        <div class="address-icon">🏫</div>
+        <h4>ИМО ВГУ (страховка)</h4>
+        <p>ул. Хользунова, 40А</p>
+        <p>Каб. 238</p>
+        <p>Пн–Чт 9:00–17:00, Пт 9:00–16:00</p>
+        <button class="btn-copy" onclick="copyText('ул. Хользунова, 40А')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🛂</div>
+        <h4>ИМО ВГУ (миграция)</h4>
+        <p>ул. Хользунова, 40А</p>
+        <p>Каб. 240–241</p>
+        <p>Миграционный учёт, продление визы</p>
+        <button class="btn-copy" onclick="copyText('ул. Хользунова, 40А, каб. 240')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">📝</div>
+        <h4>ИМО ВГУ (переводы)</h4>
+        <p>ул. Хользунова, 40А</p>
+        <p>Каб. 242 (Карпухина Н.А.)</p>
+        <p>Переводы, нострификация</p>
+        <button class="btn-copy" onclick="copyText('ул. Хользунова, 40А, каб. 242')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🏥</div>
+        <h4>МЦ «Пересвет»</h4>
+        <p>ул. Шишкова, 107Б</p>
+        <p>Анализы, флюорография</p>
+        <p>До 10:50, натощак</p>
+        <button class="btn-copy" onclick="copyText('ул. Шишкова, 107Б')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🏦</div>
+        <h4>Сбербанк</h4>
+        <p>ул. Шишкова, 65</p>
+        <p>Биометрия, банковская карта</p>
+        <p>Карта за 15 минут</p>
+        <button class="btn-copy" onclick="copyText('ул. Шишкова, 65')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🆔</div>
+        <h4>СФР (СНИЛС)</h4>
+        <p>ул. Дружинников, 5Б</p>
+        <p>Получение СНИЛС</p>
+        <p>В день обращения, бесплатно</p>
+        <button class="btn-copy" onclick="copyText('ул. Дружинников, 5Б')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🏢</div>
+        <h4>МФЦ «Мои документы»</h4>
+        <p>ул. Дружинников, 3Б</p>
+        <p>Регистрация на Госуслугах</p>
+        <button class="btn-copy" onclick="copyText('ул. Дружинников, 3Б')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">📱</div>
+        <h4>Салон Билайн</h4>
+        <p>Московский пр., 82А</p>
+        <p>SIM-карта</p>
+        <button class="btn-copy" onclick="copyText('Московский проспект, 82А')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🔒</div>
+        <h4>Отдел безопасности ВГУ</h4>
+        <p>ул. Хользунова, 42В</p>
+        <p>1 этаж, 13:00–16:00</p>
+        <p>Электронный пропуск</p>
+        <button class="btn-copy" onclick="copyText('ул. Хользунова, 42В')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🛂</div>
+        <h4>ЕМЦ (дактилоскопия)</h4>
+        <p>ул. 9 Января, 68-з</p>
+        <p>3-й подъезд, 3-й этаж</p>
+        <p>Пн–Пт 9:00–17:00</p>
+        <button class="btn-copy" onclick="copyText('ул. 9 Января, 68-з')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🟢</div>
+        <h4>МВД (зелёная карта)</h4>
+        <p>Ул. Урицкого, 58 (ср 9–11)</p>
+        <p>Ул. Войкова, 8</p>
+        <p>Ул. 9 Января, 68-и</p>
+        <button class="btn-copy" onclick="copyText('ул. Урицкого, 58')">Скопировать адрес</button>
+      </div>
+      <div class="address-card">
+        <div class="address-icon">🏠</div>
+        <h4>УСЖК (заселение)</h4>
+        <p>ул. Ф. Энгельса, 8</p>
+        <p>Начальник Власов А.В.</p>
+        <p>Заселение в общежитие</p>
+        <button class="btn-copy" onclick="copyText('ул. Фридриха Энгельса, 8')">Скопировать адрес</button>
+      </div>
+    </div>
+    <div class="card mt-2">
+      <h3>Email для связи</h3>
+      <p><a href="mailto:imo@interedu.vsu.ru">imo@interedu.vsu.ru</a> — основной</p>
+      <p><a href="mailto:Plutakhinasv@mail.ru">Plutakhinasv@mail.ru</a></p>
+      <p><a href="mailto:smorodinova@interedu.vsu.ru">smorodinova@interedu.vsu.ru</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CHECKLISTS ====== -->
+<section class="section" id="checklists" data-section="checklists">
+  <div class="container">
+    <h1>Мои чек-листы</h1>
+    <button class="btn btn-primary mb-2" onclick="window.print()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      Распечатать чек-лист
+    </button>
+
+    <div class="checklist-tabs">
+      <button class="checklist-tab active" onclick="switchChecklistTab(this,'chk-home')">Взять из дома</button>
+      <button class="checklist-tab" onclick="switchChecklistTab(this,'chk-day1')">День 1</button>
+      <button class="checklist-tab" onclick="switchChecklistTab(this,'chk-30days')">До 30-го дня</button>
+    </div>
+
+    <div class="checklist-content active" id="chk-home">
+      <div class="progress-bar"><div class="progress-fill" id="prog-home" style="width:0%"></div></div>
+      <p class="progress-text" id="text-home">0 из 7 выполнено</p>
+      <div id="list-home">
+        <div class="checklist-item" data-cl="home" data-id="h1"><input type="checkbox" onchange="updateChecklist('home')"><span>Загранпаспорт (срок ≥ 1,5 года)</span></div>
+        <div class="checklist-item" data-cl="home" data-id="h2"><input type="checkbox" onchange="updateChecklist('home')"><span>Диплом/аттестат с апостилем + перевод</span></div>
+        <div class="checklist-item" data-cl="home" data-id="h3"><input type="checkbox" onchange="updateChecklist('home')"><span>Приложение с оценками + перевод</span></div>
+        <div class="checklist-item" data-cl="home" data-id="h4"><input type="checkbox" onchange="updateChecklist('home')"><span>Свидетельство о рождении + перевод (если &lt;18)</span></div>
+        <div class="checklist-item" data-cl="home" data-id="h5"><input type="checkbox" onchange="updateChecklist('home')"><span>Доверенность + перевод (если &lt;18)</span></div>
+        <div class="checklist-item" data-cl="home" data-id="h6"><input type="checkbox" onchange="updateChecklist('home')"><span>Фото 3×4 см (6–8 шт.)</span></div>
+        <div class="checklist-item" data-cl="home" data-id="h7"><input type="checkbox" onchange="updateChecklist('home')"><span>Наличные 25 000–30 000 ₽</span></div>
+      </div>
+    </div>
+
+    <div class="checklist-content" id="chk-day1">
+      <div class="progress-bar"><div class="progress-fill" id="prog-day1" style="width:0%"></div></div>
+      <p class="progress-text" id="text-day1">0 из 6 выполнено</p>
+      <div id="list-day1">
+        <div class="checklist-item" data-cl="day1" data-id="d1"><input type="checkbox" onchange="updateChecklist('day1')"><span>Медицинская страховка (каб. 238)</span></div>
+        <div class="checklist-item" data-cl="day1" data-id="d2"><input type="checkbox" onchange="updateChecklist('day1')"><span>Анализ крови + флюорография («Пересвет», до 10:50)</span></div>
+        <div class="checklist-item" data-cl="day1" data-id="d3"><input type="checkbox" onchange="updateChecklist('day1')"><span>Справка о зачислении (каб. 239а)</span></div>
+        <div class="checklist-item" data-cl="day1" data-id="d4"><input type="checkbox" onchange="updateChecklist('day1')"><span>Заявление на заселение (каб. 238)</span></div>
+        <div class="checklist-item" data-cl="day1" data-id="d5"><input type="checkbox" onchange="updateChecklist('day1')"><span>Результаты анализов из «Пересвета» (после 14:00)</span></div>
+        <div class="checklist-item" data-cl="day1" data-id="d6"><input type="checkbox" onchange="updateChecklist('day1')"><span>Заселение в общежитие (ул. Ф. Энгельса, 8)</span></div>
+      </div>
+    </div>
+
+    <div class="checklist-content" id="chk-30days">
+      <div class="progress-bar"><div class="progress-fill" id="prog-30days" style="width:0%"></div></div>
+      <p class="progress-text" id="text-30days">0 из 6 выполнено</p>
+      <div id="list-30days">
+        <div class="checklist-item" data-cl="30days" data-id="t1"><input type="checkbox" onchange="updateChecklist('30days')"><span>Дактилоскопия (ЕМЦ, ул. 9 Января, 68-з)</span></div>
+        <div class="checklist-item" data-cl="30days" data-id="t2"><input type="checkbox" onchange="updateChecklist('30days')"><span>Зелёная карта (МВД)</span></div>
+        <div class="checklist-item" data-cl="30days" data-id="t3"><input type="checkbox" onchange="updateChecklist('30days')"><span>СНИЛС (СФР, ул. Дружинников, 5Б)</span></div>
+        <div class="checklist-item" data-cl="30days" data-id="t4"><input type="checkbox" onchange="updateChecklist('30days')"><span>SIM-карта (Билайн, Московский пр., 82А)</span></div>
+        <div class="checklist-item" data-cl="30days" data-id="t5"><input type="checkbox" onchange="updateChecklist('30days')"><span>Банковская карта (Сбербанк, ул. Шишкова, 65)</span></div>
+        <div class="checklist-item" data-cl="30days" data-id="t6"><input type="checkbox" onchange="updateChecklist('30days')"><span>Регистрация на Госуслугах (МФЦ, ул. Дружинников, 3Б)</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- Floating panel -->
+<div class="floating-panel" id="floatingPanel" onclick="navigateTo('procedures')">
+  <h4>⏰ Срочные дела</h4>
+  <p id="floatingText">Проверьте дедлайны</p>
+</div>
+
+<!-- Back to top -->
+<button class="btn-top" id="btnTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Навигация</h4>
+        <a href="#start" onclick="navigateTo('start')">Старт</a>
+        <a href="#before" onclick="navigateTo('before')">До отъезда</a>
+        <a href="#first-day" onclick="navigateTo('first-day')">Первый день</a>
+        <a href="#first-week" onclick="navigateTo('first-week')">Первая неделя</a>
+      </div>
+      <div>
+        <h4>Процедуры</h4>
+        <a href="#procedures" onclick="navigateTo('procedures')">Дактилоскопия</a>
+        <a href="#procedures" onclick="navigateTo('procedures')">Продление визы</a>
+        <a href="#study" onclick="navigateTo('study')">Нострификация</a>
+        <a href="#budget" onclick="navigateTo('budget')">Бюджет</a>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <a href="mailto:imo@interedu.vsu.ru">imo@interedu.vsu.ru</a>
+        <a href="mailto:Plutakhinasv@mail.ru">Plutakhinasv@mail.ru</a>
+        <a href="mailto:smorodinova@interedu.vsu.ru">smorodinova@interedu.vsu.ru</a>
+        <span style="color:rgba(255,255,255,0.5);font-size:14px;display:block;padding:4px 0;">ул. Хользунова, 40А</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Институт международного образования ВГУ | Версия 3.0</p>
+      <p style="margin-top:4px;font-size:12px;">Информация актуальна на август 2026 г. Проверяйте сроки в ИМО ВГУ.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================
+   НАВИГАЦИЯ (SPA)
+   ============================================ */
+const sections = ['start','before','first-day','first-week','procedures','study','budget','contacts','checklists'];
+
+function navigateTo(id) {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  // Show target
+  const target = document.getElementById(id);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  // Update nav
+  document.querySelectorAll('.nav-desktop a, .mobile-menu a').forEach(a => {
+    a.classList.toggle('active', a.dataset.section === id);
+  });
+  // Update hash
+  history.pushState(null, null, '#' + id);
+  // Apply survey filters
+  applySurveyFilters();
+}
+
+function handleHash() {
+  const hash = location.hash.replace('#','') || 'start';
+  if (sections.includes(hash)) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById(hash);
+    if (target) target.classList.add('active');
+    document.querySelectorAll('.nav-desktop a, .mobile-menu a').forEach(a => {
+      a.classList.toggle('active', a.dataset.section === hash);
+    });
+  }
+}
+
+window.addEventListener('hashchange', handleHash);
+window.addEventListener('popstate', handleHash);
+
+/* ============================================
+   МОБИЛЬНОЕ МЕНЮ
+   ============================================ */
+function toggleMobileMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('mobileOverlay').classList.toggle('open');
+}
+
+/* ============================================
+   ТАБЫ
+   ============================================ */
+function switchTab(btn, contentId) {
+  const parent = btn.closest('.container');
+  parent.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+  document.getElementById(contentId).classList.add('active');
+}
+
+/* ============================================
+   АККОРДЕОНЫ
+   ============================================ */
+function toggleAccordion(header) {
+  const acc = header.parentElement;
+  const isOpen = acc.classList.contains('open');
+  acc.classList.toggle('open');
+  header.setAttribute('aria-expanded', !isOpen);
+}
+
+/* ============================================
+   ТАЙМЛАЙН
+   ============================================ */
+function toggleTimeline(item) {
+  item.classList.toggle('open');
+}
+
+/* ============================================
+   ОПРОС (SURVEY)
+   ============================================ */
+let surveyAnswers = {};
+
+function selectSurvey(btn) {
+  const q = btn.dataset.q;
+  document.querySelectorAll(`.modal-option[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  surveyAnswers[q] = btn.dataset.val;
+}
+
+function saveSurvey() {
+  if (!surveyAnswers.visa || !surveyAnswers.age || !surveyAnswers.level) {
+    alert('Пожалуйста, ответьте на все вопросы.');
+    return;
+  }
+  localStorage.setItem('imo_survey', JSON.stringify(surveyAnswers));
+  document.getElementById('surveyModal').classList.remove('open');
+  applySurveyFilters();
+  updateFloatingPanel();
+}
+
+function applySurveyFilters() {
+  const saved = localStorage.getItem('imo_survey');
+  if (!saved) return;
+  const ans = JSON.parse(saved);
+
+  // Minor alerts
+  const minorAlert = document.getElementById('minor-alert');
+  const minorDactyl = document.getElementById('minor-dactyl');
+  const docBirth = document.getElementById('doc-birth');
+  const docProxy = document.getElementById('doc-proxy');
+
+  if (ans.age === 'minor') {
+    if (minorAlert) minorAlert.style.display = 'flex';
+    if (minorDactyl) minorDactyl.style.display = 'block';
+    if (docBirth) docBirth.style.display = 'block';
+    if (docProxy) docProxy.style.display = 'block';
+  } else {
+    if (minorAlert) minorAlert.style.display = 'none';
+    if (minorDactyl) minorDactyl.style.display = 'none';
+    if (docBirth) docBirth.style.display = 'none';
+    if (docProxy) docProxy.style.display = 'none';
+  }
+
+  // Nostrification disabled for prep
+  const optNostr = document.getElementById('opt-nostr');
+  const calcNostr = document.getElementById('calc-nostr');
+  if (ans.level === 'prep') {
+    if (optNostr) optNostr.classList.add('disabled');
+    if (calcNostr) { calcNostr.disabled = true; calcNostr.checked = false; }
+  } else {
+    if (optNostr) optNostr.classList.remove('disabled');
+    if (calcNostr) calcNostr.disabled = false;
+  }
+
+  // Visa-free: hide visa extension info
+  const procVisa = document.getElementById('proc-visa');
+  if (procVisa && ans.visa === 'visa-free') {
+    // We don't hide the tab, but we could add a notice
+  }
+}
+
+/* ============================================
+   КАЛЬКУЛЯТОР
+   ============================================ */
+function toggleCalcOption(el) {
+  if (el.classList.contains('disabled')) return;
+  const cb = el.querySelector('input[type="checkbox"]');
+  if (cb.disabled) return;
+  cb.checked = !cb.checked;
+  recalcBudget();
+}
+
+function recalcBudget() {
+  let total = 0;
+  document.querySelectorAll('.calc-option input[type="checkbox"][data-price]').forEach(cb => {
+    if (cb.checked && !cb.disabled) {
+      total += parseInt(cb.dataset.price);
+    }
+  });
+  const totalEl = document.getElementById('calcTotal');
+  totalEl.textContent = total.toLocaleString('ru-RU') + ' ₽';
+  totalEl.className = 'calc-total';
+  if (total <= 35000) totalEl.classList.add('green');
+  else if (total <= 55000) totalEl.classList.add('yellow');
+  else totalEl.classList.add('blue');
+}
+
+document.querySelectorAll('.calc-option input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', recalcBudget);
+});
+
+/* ============================================
+   ЧЕК-ЛИСТЫ
+   ============================================ */
+function switchChecklistTab(btn, contentId) {
+  const parent = btn.closest('.container');
+  parent.querySelectorAll('.checklist-tab').forEach(b => b.classList.remove('active'));
+  parent.querySelectorAll('.checklist-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(contentId).classList.add('active');
+}
+
+function updateChecklist(name) {
+  const container = document.getElementById('list-' + name);
+  const items = container.querySelectorAll('.checklist-item');
+  let checked = 0;
+  const state = {};
+  items.forEach(item => {
+    const cb = item.querySelector('input');
+    const id = item.dataset.id;
+    state[id] = cb.checked;
+    if (cb.checked) {
+      checked++;
+      item.classList.add('checked');
+    } else {
+      item.classList.remove('checked');
+    }
+  });
+  localStorage.setItem('imo_chk_' + name, JSON.stringify(state));
+  const pct = Math.round((checked / items.length) * 100);
+  document.getElementById('prog-' + name).style.width = pct + '%';
+  let text = checked + ' из ' + items.length + ' выполнено';
+  if (pct === 100) text += ' — Отлично! 🎉';
+  else if (pct > 80) text += ' — Вы почти у цели! 💪';
+  else if (pct > 50) text += ' — Больше половины! 👍';
+  document.getElementById('text-' + name).textContent = text;
+}
+
+function loadChecklists() {
+  ['home','day1','30days'].forEach(name => {
+    const saved = localStorage.getItem('imo_chk_' + name);
+    if (!saved) return;
+    const state = JSON.parse(saved);
+    const container = document.getElementById('list-' + name);
+    if (!container) return;
+    container.querySelectorAll('.checklist-item').forEach(item => {
+      const id = item.dataset.id;
+      const cb = item.querySelector('input');
+      if (state[id]) cb.checked = true;
+    });
+    updateChecklist(name);
+  });
+}
+
+function toggleCheck(cb) {
+  const item = cb.closest('.checklist-item');
+  const name = item.dataset.cl;
+  updateChecklist(name);
+}
+
+/* ============================================
+   ПОИСК
+   ============================================ */
+const searchIndex = [];
+
+function buildSearchIndex() {
+  const texts = [];
+  document.querySelectorAll('.section').forEach(sec => {
+    const secId = sec.id;
+    const secName = sec.querySelector('h1')?.textContent || secId;
+    sec.querySelectorAll('h2, h3, h4, p, li').forEach(el => {
+      const txt = el.textContent.trim();
+      if (txt.length > 10) {
+        searchIndex.push({
+          text: txt,
+          section: secId,
+          sectionName: secName,
+          title: el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4' ? txt : ''
+        });
+      }
+    });
+  });
+}
+
+function toggleSearch() {
+  const overlay = document.getElementById('searchOverlay');
+  const isOpen = overlay.classList.contains('open');
+  overlay.classList.toggle('open');
+  if (!isOpen) {
+    setTimeout(() => document.getElementById('searchInput').focus(), 100);
+  }
+}
+
+function performSearch(query) {
+  const resultsEl = document.getElementById('searchResults');
+  if (!query || query.length < 2) {
+    resultsEl.innerHTML = '';
+    return;
+  }
+  const q = query.toLowerCase();
+  const matches = searchIndex.filter(item => item.text.toLowerCase().includes(q)).slice(0, 10);
+
+  if (matches.length === 0) {
+    resultsEl.innerHTML = '<div class="search-result-item"><p>Ничего не найдено</p></div>';
+    return;
+  }
+
+  resultsEl.innerHTML = matches.map(m => `
+    <div class="search-result-item" onclick="navigateTo('${m.section}'); toggleSearch();">
+      <h4>${m.title || m.sectionName}</h4>
+      <p>${m.text.substring(0, 120)}...</p>
+    </div>
+  `).join('');
+}
+
+/* ============================================
+   ТЕМНАЯ ТЕМА
+   ============================================ */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('imo_theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('imo_theme', 'dark');
+  }
+}
+
+function loadTheme() {
+  const theme = localStorage.getItem('imo_theme');
+  if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+}
+
+/* ============================================
+   КНОПКА НАВЕРХ
+   ============================================ */
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('btnTop');
+  if (window.scrollY > 300) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+/* ============================================
+   ПЛАВАЮЩАЯ ПАНЕЛЬ
+   ============================================ */
+function updateFloatingPanel() {
+  const panel = document.getElementById('floatingPanel');
+  const text = document.getElementById('floatingText');
+  const saved = localStorage.getItem('imo_survey');
+  if (!saved) { panel.style.display = 'none'; return; }
+  const ans = JSON.parse(saved);
+
+  // Calculate days since arrival (simulate based on current date)
+  // For demo purposes, we'll show generic messages
+  const now = new Date();
+  const sept1 = new Date('2026-09-01');
+  const daysToSept1 = Math.ceil((sept1 - now) / (1000*60*60*24));
+
+  if (ans.visa === 'visa') {
+    text.textContent = 'Продление визы — подайте документы за 30–45 дней до окончания визы';
+  } else {
+    text.textContent = 'Регистрация для безвизовых — 1 500 ₽ (визовые — 500 ₽)';
+  }
+
+  if (daysToSept1 > -30 && daysToSept1 < 60) {
+    panel.style.display = 'block';
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+/* ============================================
+   ДЕДЛАЙН НА ГЛАВНОЙ
+   ============================================ */
+function updateDeadlineCounter() {
+  const now = new Date();
+  const sept1 = new Date('2026-09-01');
+  const days = Math.ceil((sept1 - now) / (1000*60*60*24));
+  const counter = document.getElementById('deadlineCounter');
+  const text = document.getElementById('deadlineText');
+  const sub = document.getElementById('deadlineSub');
+
+  if (days > 0) {
+    text.textContent = 'До начала занятий осталось ' + days + ' ' + declension(days, 'день','дня','дней');
+    counter.textContent = days + ' ' + declension(days, 'день','дня','дней');
+    counter.style.display = 'inline-block';
+    sub.textContent = 'Рекомендуемый въезд: с 25 августа';
+  } else if (days > -30) {
+    text.textContent = 'Занятия уже начались!';
+    counter.textContent = 'Медосвидетельствование — 30 дней!';
+    counter.style.display = 'inline-block';
+    sub.textContent = 'Не забудьте пройти дактилоскопию и медкомиссию';
+  } else {
+    text.textContent = 'Проверьте критические сроки';
+    counter.style.display = 'none';
+  }
+}
+
+function declension(n, f1, f2, f5) {
+  n = Math.abs(n) % 100;
+  const n1 = n % 10;
+  if (n > 10 && n < 20) return f5;
+  if (n1 > 1 && n1 < 5) return f2;
+  if (n1 === 1) return f1;
+  return f5;
+}
+
+/* ============================================
+   КОПИРОВАНИЕ АДРЕСА
+   ============================================ */
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Адрес скопирован: ' + text);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('Адрес скопирован: ' + text);
+  });
+}
+
+/* ============================================
+   ИНИЦИАЛИЗАЦИЯ
+   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  handleHash();
+  buildSearchIndex();
+  loadTheme();
+  loadChecklists();
+  updateDeadlineCounter();
+
+  // Show survey if not answered
+  const savedSurvey = localStorage.getItem('imo_survey');
+  if (!savedSurvey) {
+    setTimeout(() => document.getElementById('surveyModal').classList.add('open'), 800);
+  } else {
+    surveyAnswers = JSON.parse(savedSurvey);
+    applySurveyFilters();
+    updateFloatingPanel();
+  }
+
+  // Close modal on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.getElementById('searchOverlay').classList.remove('open');
+      if (!savedSurvey) document.getElementById('surveyModal').classList.remove('open');
+    }
+  });
+});
+</script>
+</body>
+</html>
